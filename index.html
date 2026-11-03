@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MA1508 微积分 · 第5章 · 5.4–5.6 微积分基本定理与积分技术</title>
+  <!-- MathJax 数学公式渲染引擎 -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    :root {
+      --primary-color: #1e3a8a;
+      --primary-light: #eff6ff;
+      --secondary-color: #0d9488;
+      --text-color: #1f2937;
+      --text-muted: #4b5563;
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --accent-color: #b45309;
+      --accent-bg: #fffbeb;
+      --success-border: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+      padding: 1.5rem 1rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border-color);
+    }
+
+    header {
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .course-badge {
+      display: inline-block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      background: var(--primary-light);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #0f172a;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+    }
+
+    .textbook-ref {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    nav.toc {
+      background: var(--primary-light);
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    nav.toc h2 {
+      font-size: 1.05rem;
+      color: var(--primary-color);
+      margin-bottom: 0.75rem;
+    }
+
+    nav.toc ul {
+      list-style-type: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    nav.toc a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-size: 0.95rem;
+      background: #ffffff;
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid #dbeafe;
+      transition: all 0.2s ease;
+    }
+
+    nav.toc a:hover {
+      background: var(--primary-color);
+      color: #ffffff;
+    }
+
+    section {
+      margin-bottom: 3.5rem;
+    }
+
+    h2.section-header {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+
+    h2.section-header small {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: normal;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      color: #1e293b;
+      margin: 1.75rem 0 1rem 0;
+    }
+
+    h4 {
+      font-size: 1.05rem;
+      color: #334155;
+      margin: 1.25rem 0 0.5rem 0;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    .theorem-box {
+      background: #f8fafc;
+      border-left: 4px solid var(--primary-color);
+      padding: 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .proof-box {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--secondary-color);
+      padding: 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box {
+      background: var(--accent-bg);
+      border-left: 4px solid var(--accent-color);
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .formula-banner {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      background: #f1f5f9;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .formula-banner > div {
+      font-size: 1.15rem;
+    }
+
+    ol, ul {
+      margin-left: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    details {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      user-select: none;
+    }
+
+    summary:hover {
+      text-decoration: underline;
+    }
+
+    .solution-content {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25rem 0;
+    }
+
+    table, th, td {
+      border: 1px solid var(--border-color);
+    }
+
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      font-weight: 600;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    .badge-core { background: #e0e7ff; color: #3730a3; }
+    .badge-adv { background: #fef3c7; color: #92400e; }
+
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding-top: 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <span class="course-badge">MA1508 微积分 · 第5章 · §§5.4–5.6</span>
+    <h1>微积分基本定理与积分技术</h1>
+    <p class="subtitle">将累积量与微分建立联系，进而反转链式法则与乘积法则。</p>
+    <p class="textbook-ref">参考教材：Stewart, 《单变量微积分：概念与背景》（Single Variable Calculus: Concepts and Contexts），第4版，§§5.4–5.6。</p>
+  </header>
+
+  <nav class="toc" aria-label="本讲核心目录">
+    <h2>本课导览与跳转</h2>
+    <ul>
+      <li><a href="#stewart-5-4">5.4 微积分基本定理 (A)</a></li>
+      <li><a href="#ftc-1">FTC 第一基本定理及证明</a></li>
+      <li><a href="#ftc-2">FTC 第二基本定理及证明</a></li>
+      <li><a href="#variable-limits">变限积分求导与链式法则</a></li>
+      <li><a href="#stewart-5-5">5.5 换元积分法 (B)</a></li>
+      <li><a href="#stewart-5-6">5.6 分部积分法 (C · 详细解析版)</a></li>
+      <li><a href="#liate-rule">LIATE 选元法则</a></li>
+      <li><a href="#cyclic-and-tabular">多次分部与循环积分</a></li>
+    </ul>
+  </nav>
+
+  <!-- ==================== SECTION A: 5.4 ==================== -->
+  <section id="stewart-5-4">
+    <h2 class="section-header">
+      <span>A. 微积分基本定理 (The Fundamental Theorem of Calculus)</span>
+      <small>Stewart 5.4 · 对应教材原书 p. 367</small>
+    </h2>
+
+    <div id="ftc-1">
+      <h3>1. 微积分第一基本定理 (FTC 1)</h3>
+      <div class="theorem-box">
+        <strong>精确数学陈述：</strong><br>
+        设 $a < b$。若函数 $f$ 在闭区间 $[a,b]$ 上连续，定义累积函数（变上限积分）：
+        $$A(x) = \int_a^x f(t)\,dt$$
+        则 $A(x)$ 在闭区间 $[a,b]$ 上连续，在开区间 $(a,b)$ 上处处可导，且其导数为：
+        $$A'(x) = \frac{d}{dx}\left[\int_a^x f(t)\,dt\right] = f(x)$$
+        在端点处，对应的单侧导数满足 $A'_+(a) = f(a)$ 与 $A'_-(b) = f(b)$。
+      </div>
+
+      <p><strong>核心意义：</strong>累积函数本身为任意连续函数 $f$ 提供了原函数（反导数），即使该函数不存在初等函数形式的原函数。这一判定完成了从黎曼积分构造到微分的反向闭环。</p>
+
+      <div class="highlight-box">
+        <strong>几何直观：</strong><br>
+        对于非零小量 $h$，其差商为：
+        $$\frac{A(x+h)-A(x)}{h} = \frac{1}{h}\int_x^{x+h}f(t)\,dt$$
+        这表示函数 $f$ 在极短区间 $[x, x+h]$ 上的<strong>平均值</strong>。由于 $f$ 在 $x$ 处连续，当区间宽度 $h \to 0$ 时，该平均高度必然趋向于瞬时高度 $f(x)$。
+      </div>
+
+      <div class="proof-box">
+        <strong>第一基本定理的完整严格证明：</strong>
+        <ol>
+          <li>
+            <strong>第一步：证明累积函数 $A$ 的连续性。</strong><br>
+            因 $f$ 在闭区间 $[a,b]$ 上连续，由极值定理可知 $f$ 有界，即存在常数 $M \ge 0$ 使得对任意 $t \in [a,b]$ 均有 $|f(t)| \le M$。根据积分的可加性与估值不等式，对任意 $x, y \in [a,b]$：
+            $$|A(y) - A(x)| = \left|\int_x^y f(t)\,dt\right| \le M|y - x|$$
+            当 $y \to x$ 时，上式右侧趋于 0，因此 $\lim_{y \to x} A(y) = A(x)$。这证明了 $A$ 在整个闭区间 $[a,b]$（包含端点）上均连续。
+          </li>
+          <li>
+            <strong>第二步：构造内点处的差商。</strong><br>
+            固定 $x \in (a,b)$，取充分小的 $h \neq 0$ 满足 $x+h \in [a,b]$。由常数函数的积分性质 $\int_x^{x+h} f(x)\,dt = f(x)\cdot h$（积分变量为 $t$ 时 $f(x)$ 视为常数），差商可恒等变形为：
+            $$\frac{A(x+h) - A(x)}{h} - f(x) = \frac{1}{h}\int_x^{x+h}[f(t) - f(x)]\,dt$$
+          </li>
+          <li>
+            <strong>第三步：利用 $\varepsilon$-$\delta$ 连续性控制误差。</strong><br>
+            任给 $\varepsilon > 0$，由 $f$ 在 $x$ 处的连续性，存在 $\delta > 0$，使得当 $|t - x| < \delta$ 时恒有 $|f(t) - f(x)| < \varepsilon$。<br>
+            当 $0 < |h| < \delta$ 时，介于 $x$ 与 $x+h$ 之间的所有 $t$ 均落在该邻域内。于是：
+            $$\left|\frac{A(x+h)-A(x)}{h} - f(x)\right| = \frac{1}{|h|}\left|\int_x^{x+h}[f(t)-f(x)]\,dt\right| \le \frac{1}{|h|}\cdot \varepsilon |h| = \varepsilon$$
+            由 $\varepsilon$ 的任意性，极限存在且等于 0。故：
+            $$A'(x) = \lim_{h\to 0}\frac{A(x+h)-A(x)}{h} = f(x)$$
+          </li>
+        </ol>
+      </div>
+
+      <div class="highlight-box">
+        <strong>连续性条件为何不可或缺？</strong><br>
+        可积性足以定义累积函数 $A(x)$，但<strong>不能保证</strong>处处有 $A'(x)=f(x)$。例如符号/阶跃函数：
+        在 $[-1,1]$ 上定义 $f(t)=0$ ($t<0$) 且 $f(t)=1$ ($t \ge 0$)。则累积函数为：
+        $$A(x) = \int_{-1}^x f(t)\,dt = \begin{cases} 0, & -1 \le x \le 0 \\ x, & 0 < x \le 1 \end{cases}$$
+        $A(x)$ 在 0 处形成尖角，其左导数为 0，右导数为 1，因而在跳跃间断点处不可导。
+      </div>
+    </div>
+
+    <div id="ftc-2">
+      <h3>2. 微积分第二基本定理 (FTC 2 / 牛顿-莱布尼茨公式)</h3>
+      <div class="theorem-box">
+        <strong>精确数学陈述：</strong><br>
+        设 $f$ 在 $[a,b]$ 上连续。若 $F$ 在 $[a,b]$ 连续、在 $(a,b)$ 可导，且在 $(a,b)$ 内满足 $F'(x) = f(x)$（即 $F$ 是 $f$ 的任一原函数），则：
+        $$\int_a^b f(x)\,dx = F(b) - F(a) = [F(x)]_a^b$$
+      </div>
+
+      <div class="proof-box">
+        <strong>借助 FTC 1 的优雅证明：</strong>
+        <ol>
+          <li>定义变上限积分 $A(x) = \int_a^x f(t)\,dt$。由 FTC 1，已证 $A'(x) = f(x)$。</li>
+          <li>构造辅助函数 $H(x) = F(x) - A(x)$。显然 $H'(x) = F'(x) - A'(x) = f(x) - f(x) = 0$。</li>
+          <li>根据拉格朗日中值定理推论，导数在区间上恒为 0 的函数必为常数函数。因此存在常数 $C$ 使得 $H(x) = C$。</li>
+          <li>代入左端点 $x=a$：由于 $A(a) = \int_a^a f(t)\,dt = 0$，故常数 $C = H(a) = F(a) - 0 = F(a)$。</li>
+          <li>由此得到恒等式 $F(x) - A(x) = F(a)$，即 $A(x) = F(x) - F(a)$。取 $x=b$ 即得：
+            $$\int_a^b f(t)\,dt = A(b) = F(b) - F(a)$$
+          </li>
+        </ol>
+      </div>
+
+      <div class="formula-banner">
+        <div>$$\boxed{\frac{d}{dx}\int_a^x f(t)\,dt = f(x)}$$ <br><small style="color:var(--text-muted)">FTC 1：累积的瞬时变化率等于当前值</small></div>
+        <div>$$\boxed{\int_a^b F'(x)\,dx = F(b) - F(a)}$$ <br><small style="color:var(--text-muted)">FTC 2：变化率的积分等于净变化总量</small></div>
+      </div>
+    </div>
+
+    <div id="variable-limits">
+      <h3>3. 变限积分求导与链式法则</h3>
+      <p>当积分的上下限均是 $x$ 的可微函数时，必须与链式法则（Chain Rule）结合使用：</p>
+      $$\frac{d}{dx}\int_a^{g(x)} f(t)\,dt = f(g(x))\cdot g'(x)$$
+      $$\frac{d}{dx}\int_{u(x)}^{v(x)} f(t)\,dt = f(v(x))\cdot v'(x) - f(u(x))\cdot u'(x)$$
+
+      <details>
+        <summary>点击查看经典例题：求 $H(x) = \int_x^{x^2} e^{-t^2}\,dt$ 的导数</summary>
+        <div class="solution-content">
+          <strong>解析步骤：</strong>
+          <ol>
+            <li>选定常数（如 0）拆分区间：$H(x) = \int_0^{x^2} e^{-t^2}\,dt - \int_0^x e^{-t^2}\,dt$。</li>
+            <li>分别对两项应用变上限求导法则与链式法则：
+              <ul>
+                <li>第一项：上限为 $x^2$，导数为 $e^{-(x^2)^2}\cdot (x^2)' = 2x e^{-x^4}$。</li>
+                <li>第二项：上限为 $x$，导数为 $e^{-x^2}$。</li>
+              </ul>
+            </li>
+            <li>合并得到结果：$H'(x) = 2x e^{-x^4} - e^{-x^2}$。<strong>注意：本题无需也不可能求出初等原函数。</strong></li>
+          </ol>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION B: 5.5 ==================== -->
+  <section id="stewart-5-5">
+    <h2 class="section-header">
+      <span>B. 换元积分法 (The Substitution Rule)</span>
+      <small>Stewart 5.5 · 对应教材原书 pp. 375–380</small>
+    </h2>
+
+    <p>换元积分法的本质是<strong>微分链式法则的反向应用</strong>。当被积函数中同时存在“内层函数”与其对应的“导数因子”时，通过引入新变量 $u = g(x)$ 可将复杂形式简化为基本积分表中的基础类型。</p>
+
+    <div class="theorem-box">
+      <strong>不定积分换元公式：</strong>
+      $$\int f(g(x))g'(x)\,dx = \int f(u)\,du \quad (\text{其中 } u = g(x), \, du = g'(x)\,dx)$$
+      <strong>定积分换元公式（务必同步变换积分限）：</strong>
+      $$\int_a^b f(g(x))g'(x)\,dx = \int_{g(a)}^{g(b)} f(u)\,du$$
+    </div>
+
+    <details>
+      <summary>例题 1：系数补齐 $\int x^3 \cos(x^4+2)\,dx$</summary>
+      <div class="solution-content">
+        设 $u = x^4 + 2$，则 $du = 4x^3\,dx \implies x^3\,dx = \frac{1}{4}du$。<br>
+        原式 $= \frac{1}{4}\int \cos u\,du = \frac{1}{4}\sin u + C = \frac{1}{4}\sin(x^4+2) + C$。
+      </div>
+    </details>
+
+    <details>
+      <summary>例题 2：根式积分的双重解法 $\int \sqrt{2x+1}\,dx$</summary>
+      <div class="solution-content">
+        <strong>解法 A（令被积表达式内部为 $u$）：</strong><br>
+        令 $u = 2x + 1 \implies dx = \frac{1}{2}du$。<br>
+        原式 $= \frac{1}{2}\int u^{1/2}\,du = \frac{1}{2}\cdot \frac{2}{3}u^{3/2} + C = \frac{1}{3}(2x+1)^{3/2} + C$。<br><br>
+        <strong>解法 B（令整个根式为 $u$）：</strong><br>
+        令 $u = \sqrt{2x+1} \implies u^2 = 2x + 1 \implies 2u\,du = 2\,dx \implies dx = u\,du$。<br>
+        原式 $= \int u \cdot (u\,du) = \int u^2\,du = \frac{1}{3}u^3 + C = \frac{1}{3}(2x+1)^{3/2} + C$。<br>
+        <em>结论：两种换元思路殊途同归，选取时以运算简洁为准。</em>
+      </div>
+    </details>
+
+    <div class="highlight-box">
+      <strong>对称区间的定积分简化定理：</strong><br>
+      若 $f$ 在 $[-a, a]$ 上连续：
+      <ul>
+        <li>若 $f$ 为<strong>偶函数</strong>（$f(-x)=f(x)$），则 $\int_{-a}^a f(x)\,dx = 2\int_0^a f(x)\,dx$。</li>
+        <li>若 $f$ 为<strong>奇函数</strong>（$f(-x)=-f(x)$），则 $\int_{-a}^a f(x)\,dx = 0$。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION C: 5.6 (DETAILED) ==================== -->
+  <section id="stewart-5-6">
+    <h2 class="section-header">
+      <span>C. 分部积分法 (Integration by Parts · 全方位深度剖析版)</span>
+      <small>Stewart 5.6 · 对应教材原书 pp. 381–386</small>
+    </h2>
+
+    <p>如果说换元积分法是链式法则的反转，那么<strong>分部积分法就是乘积法则（Product Rule）的逆运算</strong>。它是处理两类不同性质函数相乘（如多项式与三角函数、指数函数与反三角函数等）不可或缺的利器。</p>
+
+    <!-- 1. 原理与微元直观 -->
+    <h3>1. 公式推导与几何/微元意义</h3>
+    <div class="theorem-box">
+      <strong>严格推导：</strong><br>
+      设 $u = u(x)$ 和 $v = v(x)$ 是可微函数。根据导数的乘积法则：
+      $$\frac{d}{dx}[u(x)v(x)] = u'(x)v(x) + u(x)v'(x)$$
+      两端同时对 $x$ 求不定积分：
+      $$u(x)v(x) = \int v(x)u'(x)\,dx + \int u(x)v'(x)\,dx$$
+      移项并采用微分符号简记（$du = u'(x)dx, \, dv = v'(x)dx$），即得<strong>分部积分核心公式</strong>：
+      $$\boxed{\int u\,dv = uv - \int v\,du}$$
+      对于定积分，公式变为：
+      $$\boxed{\int_a^b u\,dv = [u(x)v(x)]_a^b - \int_a^b v\,du}$$
+    </div>
+
+    <div class="highlight-box">
+      <strong>几何直观（面积矩形分解）：</strong><br>
+      在 $u-v$ 平面上，全微分 $d(uv) = u\,dv + v\,du$ 对应一个以边长为 $u$ 和 $v$ 的矩形面积总增量。矩形右上角的总变化量由垂直微条 $u\,dv$ 与水平微条 $v\,du$ 拼接而成。因此，积出其中一条的面积 $\int u\,dv$ 等于总矩形面积 $uv$ 减去另一条的面积 $\int v\,du$。
+    </div>
+
+    <!-- 2. LIATE 原则详解 -->
+    <h3 id="liate-rule">2. 核心灵魂：如何正确选取 $u$ 与 $dv$？（LIATE 选元法则）</h3>
+    <p>分部积分成功的关键在于：<strong>新积分 $\int v\,du$ 必须比原积分 $\int u\,dv$ 更容易计算！</strong> 选取的通用黄金优先级法则为 <strong>LIATE</strong>（优先排在前面的选为 $u$，排在后面的与 $dx$ 结合选为 $dv$）：</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>优先级字母</th>
+          <th>函数类型</th>
+          <th>典型代表</th>
+          <th>为何倾向选为 $u$ 或 $dv$？</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--primary-color)">L</strong></td>
+          <td>对数函数 (Logarithmic)</td>
+          <td>$\ln x, \, \log_2 x$</td>
+          <td>导数转化为代数分式（$\frac{1}{x}$），求导后能大幅降维；其本身难以直接积分。</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--primary-color)">I</strong></td>
+          <td>反三角函数 (Inverse Trig)</td>
+          <td>$\arcsin x, \, \arctan x$</td>
+          <td>求导变成代数无理式或有理式（如 $\frac{1}{1+x^2}$），能摆脱超越函数特性。</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--primary-color)">A</strong></td>
+          <td>代数/多项式函数 (Algebraic)</td>
+          <td>$x^n, \, 3x^2+1$</td>
+          <td>连续求导次数减少，可降幂衰减直至常数。</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--secondary-color)">T</strong></td>
+          <td>三角函数 (Trigonometric)</td>
+          <td>$\sin x, \, \cos x, \, \sec^2 x$</td>
+          <td>积分极其容易且具有周期循环性，非常适合扮演 $dv$。</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--secondary-color)">E</strong></td>
+          <td>指数函数 (Exponential)</td>
+          <td>$e^x, \, 2^x$</td>
+          <td>求导与积分形式几乎完全保持不变，是承担 $dv$ 的最理想角色。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 3. 五大实战高频类型精析 -->
+    <h3 id="cyclic-and-tabular">3. 分部积分五大经典模式深度拆解</h3>
+
+    <!-- 模式一 -->
+    <h4>模式一：隐式因子法（令 $dv = dx$，攻克对数与反三角函数）</h4>
+    <p>当被积函数表面上只有一个函数（如 $\ln x$ 或 $\arctan x$），无法拆成乘积时，<strong>将隐藏的因子 $1$ 作为 $dv$（即 $dv = dx$）</strong>。</p>
+    <details open>
+      <summary>深入实战：求 $\int \ln x\,dx$</summary>
+      <div class="solution-content">
+        <ol>
+          <li>根据 LIATE 法则，令 $u = \ln x$，则剩余部分 $dv = dx$。</li>
+          <li>微分与积分：$du = \frac{1}{x}dx$，且 $v = \int 1\,dx = x$。</li>
+          <li>代入分部公式：
+            $$\int \ln x\,dx = (\ln x)(x) - \int x \cdot \left(\frac{1}{x}dx\right) = x\ln x - \int 1\,dx = x\ln x - x + C$$
+          </li>
+        </ol>
+      </div>
+    </details>
+
+    <details>
+      <summary>深入实战：求 $\int_0^1 \arctan x\,dx$（结合定积分计算）</summary>
+      <div class="solution-content">
+        <ol>
+          <li>令 $u = \arctan x \implies du = \frac{1}{1+x^2}dx$；令 $dv = dx \implies v = x$。</li>
+          <li>应用定积分分部公式：
+            $$\int_0^1 \arctan x\,dx = [x\arctan x]_0^1 - \int_0^1 \frac{x}{1+x^2}\,dx$$
+          </li>
+          <li>计算边界代入项：$[1\cdot \arctan 1] - [0\cdot \arctan 0] = 1\cdot \frac{\pi}{4} - 0 = \frac{\pi}{4}$。</li>
+          <li>计算剩余积分：利用换元法，分子凑微分 $x\,dx = \frac{1}{2}d(1+x^2)$：
+            $$\int_0^1 \frac{x}{1+x^2}\,dx = \left[\frac{1}{2}\ln(1+x^2)\right]_0^1 = \frac{1}{2}\ln 2 - \frac{1}{2}\ln 1 = \frac{1}{2}\ln 2$$
+          </li>
+          <li>最终结果：$\frac{\pi}{4} - \frac{1}{2}\ln 2$。</li>
+        </ol>
+      </div>
+    </details>
+
+    <!-- 模式二 -->
+    <h4>模式二：多次重复分部与“表格积分法”（Tabular Method / 降幂）</h4>
+    <p>当多项式 $x^n$ 与正弦、余弦或指数函数相乘时，单次分部只能将幂次降低 1 次。需要连续分部 $n$ 次才能彻底消除多项式。对于这类题目，<strong>表格法（吉尔曼-算子速算法）</strong>能极大地消除繁琐的书写与正负号错误。</p>
+
+    <div class="proof-box">
+      <strong>表格法核心原理：</strong><br>
+      左列放不断求导的多项式（$D$ 列），右列放不断积分的项（$I$ 列），正负号交替配对：
+      <table style="text-align: center; margin-top: 10px;">
+        <thead>
+          <tr>
+            <th>符号</th>
+            <th>求导项 $D$ (直至为 0)</th>
+            <th>积分项 $I$</th>
+            <th>相乘配对方式</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>$+$</td>
+            <td>$x^2$</td>
+            <td>$e^{2x}$</td>
+            <td>对角线连线相乘 $\searrow$</td>
+          </tr>
+          <tr>
+            <td>$-$</td>
+            <td>$2x$</td>
+            <td>$\frac{1}{2}e^{2x}$</td>
+            <td>对角线连线相乘 $\searrow$</td>
+          </tr>
+          <tr>
+            <td>$+$</td>
+            <td>$2$</td>
+            <td>$\frac{1}{4}e^{2x}$</td>
+            <td>对角线连线相乘 $\searrow$</td>
+          </tr>
+          <tr>
+            <td>$-$</td>
+            <td>$0$</td>
+            <td>$\frac{1}{8}e^{2x}$</td>
+            <td>求导为 0 终止</td>
+          </tr>
+        </tbody>
+      </table>
+      直接按对角线连线累加求和：
+      $$\int x^2 e^{2x}\,dx = +(x^2)\left(\frac{1}{2}e^{2x}\right) - (2x)\left(\frac{1}{4}e^{2x}\right) + (2)\left(\frac{1}{8}e^{2x}\right) + C = e^{2x}\left(\frac{x^2}{2} - \frac{x}{2} + \frac{1}{4}\right) + C$$
+    </div>
+
+    <!-- 模式三 -->
+    <h4>模式三：循环积分与代数方程求解（Solving for the Unknown Integral）</h4>
+    <p>当指数函数与正弦/余弦函数相乘（如 $e^{ax}\cos(bx)$）时，两类函数无论求导多少次均不会衰减消失。连续两次分部积分后，<strong>原积分会以相反符号重新出现在右侧</strong>，此时将其视为代数未知数 $I$ 移项求解即可！</p>
+
+    <details open>
+      <summary>深入实战经典全过程：计算 $I = \int e^x \sin x\,dx$</summary>
+      <div class="solution-content">
+        <ol>
+          <li><strong>第一次分部：</strong><br>
+            选 $u = \sin x \implies du = \cos x\,dx$；选 $dv = e^x dx \implies v = e^x$。<br>
+            $$I = e^x \sin x - \int e^x \cos x\,dx \quad \text{—— 记后项为新积分 } I_2$$
+          </li>
+          <li><strong>第二次分部（必须保持选元方向一致，否则会退化为 $0=0$）：</strong><br>
+            对 $I_2 = \int e^x \cos x\,dx$，继续选三角函数为导数：<br>
+            令 $u_2 = \cos x \implies du_2 = -\sin x\,dx$；$dv_2 = e^x dx \implies v_2 = e^x$。<br>
+            $$I_2 = e^x \cos x - \int e^x (-\sin x)\,dx = e^x \cos x + \int e^x \sin x\,dx = e^x \cos x + I$$
+          </li>
+          <li><strong>回代建立代数方程：</strong><br>
+            将 $I_2$ 代回最初的等式：
+            $$I = e^x \sin x - [e^x \cos x + I] = e^x \sin x - e^x \cos x - I$$
+          </li>
+          <li><strong>移项求解未知量 $I$：</strong><br>
+            $$2I = e^x(\sin x - \cos x) \implies I = \frac{1}{2}e^x(\sin x - \cos x) + C$$
+          </li>
+        </ol>
+      </div>
+    </details>
+
+    <!-- 4. 常见四大易错陷阱 -->
+    <h3>4. 分部积分常见“翻车”避坑指南</h3>
+    <div class="highlight-box" style="background:#fee2e2; border-left-color: #ef4444;">
+      <ul style="margin-bottom:0;">
+        <li><strong>陷阱 1：循环积分中选元中途变卦。</strong> 在计算类似 $\int e^x \sin x\,dx$ 时，若第一次设 $u=\sin x$，第二次却反过来设 $u=e^x$，最后必然推导出荒谬的恒等式 $I = e^x\sin x - (e^x\sin x - I) \implies I = I$（即 $0=0$）。<strong>在连续分部过程中，同类型函数必须保持同一角色设定！</strong></li>
+        <li><strong>陷阱 2：定积分中漏掉 $uv$ 的上下限求值。</strong> 公式为 $[uv]_a^b - \int_a^b v\,du$。不少初学者只给后面的积分套上下限，而将前面的 $uv$ 遗忘在括号外或不代入端点值。</li>
+        <li><strong>陷阱 3：负号分配错误。</strong> 当公式写成 $uv - \int v\,du$ 且 $v\,du$ 本身带有负号（例如 $\int \cos x\,dx$ 的积分或导数中含负号）时，极易发生减负得负的符号翻车，务必加中括号隔开。</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p>MA1508 微积分讲义 · 5.4–5.6 完整中文教学版 · 已适配现代屏幕与公式排版</p>
+  </footer>
+</div>
+
+</body>
+</html>
